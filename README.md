@@ -1,6 +1,6 @@
-# Kafka Web Console
+# Kafka Admin Tool
 
-The Kafka Web Console is an admin tool for managing your [Kafka](http://kafka.apache.org/) cluster. It provides a quick
+The Kafka Admin Tool is an admin tool for managing your [Kafka](http://kafka.apache.org/) cluster. It provides a quick
 and easy way to administer your Kafka cluster. The console allows you to create/delete topics, and find
 information about your cluster, including detailed information about topics, brokers, and consumers.
 
@@ -9,7 +9,7 @@ Kafka to get up and running quickly. The console organizes and consolidates info
 Kafka cluster and presents it as a set of easy to understand web pages.
 
 
-The Kafka Web Console was built for Kafka v0.8, as a stand alone web application written in Scala using the
+The Kafka Admin Tool was built for Kafka v0.8, as a stand alone web application written in Scala using the
 [Play Framework](http://www.playframework.com/).
 
 
@@ -20,12 +20,12 @@ The Kafka Web Console was built for Kafka v0.8, as a stand alone web application
 
 2. Clone the project
 ```
-	$ git clone git@github.com:netossd/KafkaWebConsole.git
-	$ cd KafkaWebConsole/
+	$ git clone git@github.com:Comcast/kafka-admin-tool.git
+	$ cd kafka-admin-tool/
 ```
 3. Run project, override zookeeper location (if not localhost:2181)
 ```
-	$KafkaWebConsole> sbt run -Dzk.host=<zookeeper.host>:<zookeeper.port>
+	$kafka-admin-tool> sbt run -Dzk.host=<zookeeper.host>:<zookeeper.port>
 ```
 4. Navigate browser to Console
  [localhost:9000](http://localhost:9000)
@@ -37,8 +37,8 @@ requests or feature branches should be made off of 'develop' branch. Releases wi
 number, we will be using [semantic versioning](http://semver.org/) of the form MAJOR.MINOR.PATCH
 
 1. Install the [Play Framework v2.0.4](http://www.playframework.com/download)
-2. Clone the repo:$ git clone git@github.com:netossd/KafkaWebConsole.git KafkaWebConsole
-3. Change directories into the project home: $ cd KafkaWebConsole
+2. Clone the repo:$ git clone git@github.com:Comcast/kafka-admin-tool.git kafka-admin-tool
+3. Change directories into the project home: $ cd kafka-admin-tool
 4. Switch to development branch:$ git checkout develop
 5. Start play console:$ play
 6. Run the application (it will start on localhost:9000 by default):$ run
@@ -50,15 +50,15 @@ number, we will be using [semantic versioning](http://semver.org/) of the form M
 To build a binary version of the application:
 
 ```
-$ git clone git@github.com:netossd/KafkaWebConsole.git
-$ cd KafkaWebConsole/
+$ git clone git@github.com:Comcast/kafka-admin-tool.git
+$ cd kafka-admin-tool/
 $ play dist
 ```
 
 
 Bugs and Feedback
 ----------------
-For bugs, suggestions, or feedback please use [Github Issues](https://github.com/netossd/KafkaWebConsole/issues).
+For bugs, suggestions, or feedback please use [Github Issues](https://github.com/Comcast/kafka-admin-tool/issues).
 
 License
 -------

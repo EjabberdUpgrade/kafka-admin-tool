@@ -1,0 +1,57 @@
+@**************************************************************************
+# Copyright 2014 Comcast Cable Communications Management, LLC
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+**************************************************************************@
+
+@(id: String, title: String, consumers: Seq[String])
+<h3>@title</h3>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="table_consumers">
+        <thead>
+            <tr>
+                <th>Consumer Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(consumer <- consumers) {
+                <tr>
+                    <td>@consumer</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+<script>
+
+    $(document).ready(function(){
+        $('#table_consumers').dataTable( {
+            "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+            "bInfo": false,
+            "bPaginate": false,
+            "sPaginationType": "bootstrap",
+    "oLanguage": {
+    "sEmptyTable": "<div class='alert alert-error'>All consumers in this group are down.</div>"
+    }
+        });
+    });
+    $.extend( $.fn.dataTableExt.oStdClasses, {
+        "sWrapper": "dataTables_wrapper form-inline"
+    } );
+
+
+
+</script>

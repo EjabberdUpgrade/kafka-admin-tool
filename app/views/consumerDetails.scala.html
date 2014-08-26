@@ -1,0 +1,65 @@
+@**************************************************************************
+# Copyright 2014 Comcast Cable Communications Management, LLC
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+**************************************************************************@
+
+@(groupName: String, consumers: Seq[String], cOffsets: scala.collection.Map[String,List[kafka.ConsumerGroupDetails]])
+
+@lagColor(lag: Long) = @{
+    lag match {
+        case x:Long if x < 100  => { "label-success" }
+        case x:Long if x <= 500  => { "label-warning" }
+        case x:Long if x > 500  => { "label-important" }
+        case _        => { "label-inverse" }
+        }
+}
+
+@main("Kafka Admin Console - Consumer Group") {
+    <div class="span12">
+        <h2>Consumer Group: @groupName</h2>
+        @for(topic <- cOffsets) {
+            <h3>Topic: <span class="muted">@topic._1</span></h3>
+            <div class="well">
+            @for(cons <- topic._2) {
+                <h4>Partition: @cons.partionId, Offset: <span title="Latest Offset" class="badge">@cons.partitionLatestOffset</span></h4>
+                <ul>
+                    <li>Owner: @cons.owner</li>
+                    <li>Offset: @cons.offset</li>
+                    <li>
+                        <span class="label @lagColor(cons.lag)">Lag: @cons.lag</span>
+                    </li>
+                </ul>
+                <div class="well well-small" style="background-color:#fff">
+                    <form class="form-inline" action="/consumer/details/reset">
+                        <input type="hidden" name="topic" value="@topic._1" />
+                        <input type="hidden" name="group" value="@groupName" />
+                        <input type="hidden" name="pid" value="@cons.partionId" />
+
+                        <span class="help-block">Reset consumer offset for partition.</span>
+                        <input type="number" min="0" name="newOffset" placeholder="Offset #" />
+                        <button class="btn" type="submit" formmethod="post">Reset Offset</button>
+
+                    </form>
+                </div>
+            }
+            </div>
+        }
+    </div>
+    <div class="span12">
+        @consumersTable("ac", "Consumer Nodes", consumers)
+    </div>
+}
